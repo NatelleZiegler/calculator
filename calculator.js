@@ -1,5 +1,5 @@
-var x = "0";
-var y = "0";
+var x = [];
+var y = [];
 var op = "";
 
 /**
@@ -51,7 +51,7 @@ document.getElementById("equals").addEventListener("click", function(){
 	y = parseInt(y);
 	display.innerHTML = operate(x, y, op);
 	x = display.innerHTML;
-	y = "0";
+	y = "";
 });
 
 function operatorClick() {
@@ -65,8 +65,8 @@ function operatorClick() {
 **/
 document.getElementById("clear").addEventListener("click", function(){
 	display.innerHTML = 0;
-	x = "0";
-	y = "0";
+	x = "";
+	y = "";
 	op = "";
 });
 
@@ -95,6 +95,12 @@ function divide(x, y) {
 }
 
 function operate(x, y, operator) {
+	if(isNaN(x)) {
+		return 0;
+	}
+	if(isNaN(y)) {
+		return x;
+	}
 	switch(operator) {
 		case "+":
 			return add(x, y);

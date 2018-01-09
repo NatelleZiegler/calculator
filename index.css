@@ -6,3 +6,20 @@
 	grid-gap: 0px;
 	margin: 0 auto;
 }
+
+h1 {
+	text-align: center;
+	color: #0f0851;
+}
+
+body {
+	background-color: #b3b2ba;
+}
+
+#display {
+	background-color: white;
+	width: 299px;
+	height: 25px;
+	grid-gap: 0px;
+	margin: 0 auto;
+}
