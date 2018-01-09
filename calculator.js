@@ -1,5 +1,6 @@
-var x = [];
-var y = [];
+var arr = new Array();
+var opArr = new Array();
+var num = "";
 var op = "";
 
 /**
@@ -25,12 +26,14 @@ function numberClick() {
 	}
 	//If this is the second operand, store appropriately in y variable
 	else if(isNaN(parseInt(display.innerHTML.charAt(display.innerHTML.length - 1), 10))) {
-		y += this.innerHTML;
+		arr.push(num);
+		num = "";
 		display.innerHTML += this.innerHTML;
 	}
 	else {
 		display.innerHTML += this.innerHTML;
 	}
+	num += this.innerHTML;
 }
 
 /**
@@ -47,17 +50,22 @@ document.getElementById("multiply").addEventListener("click", operatorClick);
 document.getElementById("divide").addEventListener("click", operatorClick);
 //Solving an operation
 document.getElementById("equals").addEventListener("click", function(){
-    x = parseInt(x);
-	y = parseInt(y);
-	display.innerHTML = operate(x, y, op);
-	x = display.innerHTML;
-	y = "";
+	arr.push(num);
+	var answer = "";
+	var numberCalculations = opArr.length;
+	for(var i = 0; i < numberCalculations; i++) {
+		var x = parseInt(arr.shift());
+		var y = parseInt(arr.shift());
+		answer = operate(x, y, opArr.shift());
+		arr.unshift(answer);
+	}
+	display.innerHTML = answer;
 });
 
 function operatorClick() {
-	x = display.innerHTML;
 	display.innerHTML += this.innerHTML;
 	op = this.innerHTML;
+	opArr.push(op);
 }
 
 /**
