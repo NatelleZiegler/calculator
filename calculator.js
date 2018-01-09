@@ -20,7 +20,7 @@ document.getElementById("0").addEventListener("click", numberClick);
 
 function numberClick() {
 	//If this is the first number being pressed, reset display
-	if(display.innerHTML === "0") {
+	if(display.innerHTML === "0" || display.innerHTML === "ERROR") {
 		x = this.innerHTML;
 		display.innerHTML = this.innerHTML;
 	}
@@ -53,16 +53,26 @@ document.getElementById("subtract").addEventListener("click", operatorClick);
 document.getElementById("multiply").addEventListener("click", operatorClick);
 document.getElementById("divide").addEventListener("click", operatorClick);
 //Solving an operation
-document.getElementById("equals").addEventListener("click", function(){
+document.getElementById("equals").addEventListener("click", equalsClicked);
+
+function equalsClicked() {
 	x = operate(parseInt(x), parseInt(y), op);
 	display.innerHTML = x;
 	y = "";
 	op = "";
-});
+}
 
 function operatorClick() {
-	display.innerHTML += this.innerHTML;
-	op = this.innerHTML;
+	if(op === "") {
+		display.innerHTML += this.innerHTML;
+		op = this.innerHTML;
+	}
+	else {
+		var temp = this.innerHTML;
+		equalsClicked();
+		op = temp;
+		display.innerHTML += op;
+	}
 }
 
 /**
